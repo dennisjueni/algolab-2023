@@ -1,4 +1,3 @@
-/// 2
 #include <algorithm>
 #include <iostream>
 #include <map>

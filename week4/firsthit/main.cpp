@@ -1,4 +1,3 @@
-/// 1
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <algorithm>
 #include <iomanip>

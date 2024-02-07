@@ -1,10 +1,10 @@
+#include <algorithm>
 #include <iostream>
-#include <limits>
+#include <vector>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/push_relabel_max_flow.hpp>
 
-// Graph Type with nested interior edge properties for flow algorithms
 typedef boost::adjacency_list_traits<boost::vecS, boost::vecS, boost::directedS>
     traits;
 typedef boost::adjacency_list<
@@ -18,7 +18,6 @@ typedef boost::adjacency_list<
 typedef traits::vertex_descriptor vertex_desc;
 typedef traits::edge_descriptor edge_desc;
 
-// Custom edge adder class, highly recommended
 class edge_adder {
   graph &G;
 
@@ -38,53 +37,67 @@ public:
 };
 
 void testcase() {
+  int l, p;
+  std::cin >> l >> p;
 
-  int n, m, s, d;
-  std::cin >> n >> m >> s >> d;
-
-  // 2 per original vertex and 2 for source & sink
-  graph G(2 * n + 2);
+  // one vertex vor every location, one vertex for every path and source & sink
+  graph G(l + 2);
   edge_adder adder(G);
 
-  int source = 2 * n;
-  int sink = 2 * n + 1;
+  int source = l;
+  int sink = l + 1;
 
-  // Connect cities with each other
-  for (int i = 0; i < n; i++) {
-    adder.add_edge(i, n + i, 1);
+  std::vector<int> supplyPerLocation(l);
+  std::vector<int> demandPerLocation(l);
+
+  int totalDemand = 0;
+
+  for (int i = 0; i < l; i++) {
+    int currentSoldiers, neededSoldiers;
+    std::cin >> currentSoldiers >> neededSoldiers;
+
+    supplyPerLocation[i] = currentSoldiers;
+    demandPerLocation[i] = neededSoldiers;
   }
 
-  for (int i = 0; i < m; i++) {
-    int u, v;
-    std::cin >> u >> v;
+  for (int i = 0; i < p; i++) {
+    int from, to, minNum, maxNum;
+    std::cin >> from >> to >> minNum >> maxNum;
 
-    adder.add_edge(n + u, v, 1);
+    adder.add_edge(from, to, maxNum - minNum);
+
+    demandPerLocation[from] += minNum;
+    supplyPerLocation[to] += minNum;
   }
 
-  for (int i = 0; i < s; i++) {
-    int u;
-    std::cin >> u;
+  for (int i = 0; i < l; i++) {
+    int supply = supplyPerLocation[i] - demandPerLocation[i];
+    int demand = demandPerLocation[i] - supplyPerLocation[i];
+    if (supply > 0) {
+      adder.add_edge(source, i, supply);
+    } else if (demand > 0) {
+      adder.add_edge(i, sink, demand);
 
-    adder.add_edge(source, u, 1);
-  }
-
-  for (int i = 0; i < d; i++) {
-    int u;
-    std::cin >> u;
-
-    adder.add_edge(n + u, sink, 1);
+      totalDemand += demand;
+    }
   }
 
   long flow = boost::push_relabel_max_flow(G, source, sink);
-  std::cout << flow << "\n";
+
+  if (flow != totalDemand) {
+    std::cout << "no\n";
+  } else {
+    std::cout << "yes\n";
+  }
 }
 
 int main() {
   std::ios_base::sync_with_stdio(false);
-
   int t;
   std::cin >> t;
+
   for (int i = 0; i < t; i++) {
     testcase();
   }
+  return 0;
 }

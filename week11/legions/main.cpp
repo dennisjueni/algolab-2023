@@ -1,4 +1,3 @@
-/// 4
 #include <CGAL/Gmpz.h>
 #include <CGAL/QP_functions.h>
 #include <CGAL/QP_models.h>

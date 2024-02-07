@@ -1,4 +1,3 @@
-/// 2
 #include <cmath>
 #include <iostream>
 #include <set>

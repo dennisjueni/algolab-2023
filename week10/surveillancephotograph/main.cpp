@@ -1,4 +1,3 @@
-/// 1
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/push_relabel_max_flow.hpp>
 #include <iostream>

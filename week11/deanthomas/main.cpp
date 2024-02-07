@@ -1,4 +1,3 @@
-/// 3
 #include <cmath>
 #include <iostream>
 #include <limits>
