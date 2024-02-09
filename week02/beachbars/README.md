@@ -1,4 +1,4 @@
-## Solution
+## Solution
 
 The solution to the problem is a straightforward Sliding Window approach.
 We first sort the beachbars, according to their position along the beach.
