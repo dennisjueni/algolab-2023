@@ -8,7 +8,7 @@ void testcase() {
   std::vector<std::vector<int>> prefixSums(n + 1, std::vector<int>(n + 1, 0));
 
   // Start by calculating the prefixSums of the matrix, with the first row and
-  // col being all zeroes for later purposes
+  // col being all zeroes for easier indexing
   for (int i = 1; i <= n; i++) {
     for (int j = 1; j <= n; j++) {
       int newNum;
@@ -21,7 +21,7 @@ void testcase() {
   int result = 0;
 
   // Go through all pairs of rows and calculate how many numbers are of
-  // same/diff parity Then we can simply look at the number of possibilities of
+  // same/diff parity. Then we can simply look at the number of possibilities of
   // choosing a pair of either same or diff parity, which willl lead us to our
   // result
   for (int i = 0; i <= n; i++) {
