@@ -31,6 +31,7 @@ void testcase() {
 
       int newPoint1 = beachBars[j] - currLongestDist;
       int newPoint2 = beachBars[i] + currLongestDist;
+
       if (numParasols == maxParasols && currLongestDist == longestDist) {
         optimalPoints.insert(newPoint1);
         optimalPoints.insert(newPoint2);
