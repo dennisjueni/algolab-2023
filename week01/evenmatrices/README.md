@@ -1,5 +1,0 @@
-## Solution
-
-This problem is very similar to [Even Pairs](./week01/evenpairs). Instead of only having one row we can now have multiple rows. Again we first calculate the prefix sum, this time we actually calculate and save it. In the case of a matrix the prefix sum is simply the sum of all entries with indices smaller than the current indices.
-
-Afterwards, we can go through each pair of rows and check at every column if both rows have the "same-parity" prefix sum, or if they have "different parity". If we then want a submatrix with even sum of entries, we either need to start at the column that has the same parity and end in a column with the same parity, or both columns need to have different parities. If we do this for every pair of rows, and additionally add a "fake" first row and column to handle the edges, we get to almost exactly the same code as in Even Pairs again.
