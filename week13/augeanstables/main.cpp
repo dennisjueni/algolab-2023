@@ -1,4 +1,3 @@
-//
 #include <iostream>
 
 #include <CGAL/Gmpz.h>
